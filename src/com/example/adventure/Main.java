@@ -1,5 +1,6 @@
 package com.example.adventure;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -25,25 +26,25 @@ public class Main {
         locations.get(1).addExit("W",2);
         locations.get(1).addExit("E",3);
         locations.get(1).addExit("S",4);
-       // locations.get(1).addExit("Q",0);
+
 
         // exits for room 2
         locations.get(2).addExit("N",5);
-        //locations.get(2).addExit("Q",0);
+
 
         // exits for room 3
         locations.get(3).addExit("W",1);
-        //locations.get(3).addExit("Q",0);
+
 
         // exits for room 4
         locations.get(4).addExit("N",1);
         locations.get(4).addExit("W",2);
-        //locations.get(4).addExit("Q",0);
+
 
         // exits for room 5
         locations.get(5).addExit("S",1);
         locations.get(5).addExit("W",2);
-       // locations.get(5).addExit("Q",0);
+
 
 
 
@@ -63,14 +64,55 @@ public class Main {
             System.out.println();
 
             String direction = scanner.nextLine().toUpperCase();
+            String[] directionArray = direction.split(" ");
 
             if(exits.containsKey(direction)){
                 loc = exits.get(direction);
-            }else{
+            }else if(Arrays.asList(directionArray).contains("WEST")||Arrays.asList(directionArray).contains("EAST")
+                    ||Arrays.asList(directionArray).contains("NORTH")||Arrays.asList(directionArray).contains("SOUTH")){
+                for(String i : directionArray){
+                    switch (i){
+                        case "WEST":
+                            direction = "W";
+                            loc = exits.get(direction);
+                            break;
+                        case "EAST":
+                            direction = "E";
+                            loc = exits.get(direction);
+                            break;
+                        case "NORTH":
+                            direction = "N";
+                            loc = exits.get(direction);
+                            break;
+                        case "SOUTH":
+                            direction = "S";
+                            loc = exits.get(direction);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+
+            }
+
+
+            else{
                 System.out.println("You cannot go in that direction");
             }
 
         }
 
+        // code for how to split a string in Java using a string array and the .split method.
+//        String[] road = "You are standing at the end of a road before a small brick building".split(" ");
+//        for (String i : road){
+//            System.out.println(i);
+//        }
+
+
+
+
     }
+
+
 }
