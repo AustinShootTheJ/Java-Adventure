@@ -65,38 +65,33 @@ public class Main {
 
             String direction = scanner.nextLine().toUpperCase();
             String[] directionArray = direction.split(" ");
-
-            if(exits.containsKey(direction)){
-                loc = exits.get(direction);
-            }else if(Arrays.asList(directionArray).contains("WEST")||Arrays.asList(directionArray).contains("EAST")
-                    ||Arrays.asList(directionArray).contains("NORTH")||Arrays.asList(directionArray).contains("SOUTH")){
-                for(String i : directionArray){
-                    switch (i){
-                        case "WEST":
-                            direction = "W";
-                            loc = exits.get(direction);
-                            break;
-                        case "EAST":
-                            direction = "E";
-                            loc = exits.get(direction);
-                            break;
-                        case "NORTH":
-                            direction = "N";
-                            loc = exits.get(direction);
-                            break;
-                        case "SOUTH":
-                            direction = "S";
-                            loc = exits.get(direction);
-                            break;
-                        default:
-                            break;
-                    }
+            for(String i: directionArray){
+                switch (i) {
+                    case "WEST":
+                        direction = "W";
+                        loc = exits.get(direction);
+                        break;
+                    case "EAST":
+                        direction = "E";
+                        loc = exits.get(direction);
+                        break;
+                    case "NORTH":
+                        direction = "N";
+                        loc = exits.get(direction);
+                        break;
+                    case "SOUTH":
+                        direction = "S";
+                        loc = exits.get(direction);
+                        break;
+                    default:
+                        break;
                 }
-
-
             }
 
-
+            if(exits.containsKey(direction)) {
+                loc = exits.get(direction);
+            }
+            
             else{
                 System.out.println("You cannot go in that direction");
             }
