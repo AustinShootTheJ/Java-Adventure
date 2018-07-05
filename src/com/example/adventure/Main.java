@@ -45,6 +45,13 @@ public class Main {
         locations.get(5).addExit("S",1);
         locations.get(5).addExit("W",2);
 
+        // Words to check against for directional values.
+        Map<String, String> vocabulary = new HashMap<String, String>();
+        vocabulary.put("QUIT","Q");
+        vocabulary.put("NORTH", "N");
+        vocabulary.put("SOUTH","S");
+        vocabulary.put("WEST","W");
+        vocabulary.put("EAST","E");
 
 
 
@@ -64,34 +71,52 @@ public class Main {
             System.out.println();
 
             String direction = scanner.nextLine().toUpperCase();
-            String[] directionArray = direction.split(" ");
-            for(String i: directionArray){
-                switch (i) {
-                    case "WEST":
-                        direction = "W";
-                        loc = exits.get(direction);
+            // checks for input that is not a single char
+            if(direction.length() > 1){
+                // splits the string into an array for checking
+                String[] words = direction.split(" ");
+                // checks each word until it finds one in our vocab and assigns direction to the related key. 
+                for(String word: words){
+                    if(vocabulary.containsKey(word)){
+                        direction = vocabulary.get(word);
+                        // break is inserted so we do not check the rest of the words in the sentence.
                         break;
-                    case "EAST":
-                        direction = "E";
-                        loc = exits.get(direction);
-                        break;
-                    case "NORTH":
-                        direction = "N";
-                        loc = exits.get(direction);
-                        break;
-                    case "SOUTH":
-                        direction = "S";
-                        loc = exits.get(direction);
-                        break;
-                    default:
-                        break;
+                    }
                 }
             }
+
+
+            // old solution for handling word inputs.
+//            if(direction.length()>1) {
+//                String[] directionArray = direction.split(" ");
+//                for (String i : directionArray) {
+//                    switch (i) {
+//                        case "WEST":
+//                            direction = "W";
+//                            loc = exits.get(direction);
+//                            break;
+//                        case "EAST":
+//                            direction = "E";
+//                            loc = exits.get(direction);
+//                            break;
+//                        case "NORTH":
+//                            direction = "N";
+//                            loc = exits.get(direction);
+//                            break;
+//                        case "SOUTH":
+//                            direction = "S";
+//                            loc = exits.get(direction);
+//                            break;
+//                        default:
+//                            break;
+//                    }
+//                }
+//            }
 
             if(exits.containsKey(direction)) {
                 loc = exits.get(direction);
             }
-            
+
             else{
                 System.out.println("You cannot go in that direction");
             }
